@@ -1,0 +1,45 @@
+﻿
+CREATE TABLE [dbo].[Materials](
+	[MatId] [int] NOT NULL PRIMARY KEY,
+	[MatNum] [int] NOT NULL DEFAULT 0,
+	[Date1] [int] NOT NULL DEFAULT 0,
+	[Batch1] [nvarchar](50) NULL,
+	[Name1] [nvarchar](200) NOT NULL,
+	[Name2] [nvarchar](100) NULL,
+	[BrCode1] [nvarchar](70) NULL,
+	[BrCode2] [nvarchar](70) NULL,
+	[UOM1] [nvarchar](200) NOT NULL, /* Base Unit Of measuer   */ 
+	[UOM2] [nvarchar](200) NOT NULL, /* Sale/Purchase Unit Of measuer   */ 
+	[MName2] [nvarchar](200) NOT NULL,
+	[Price1] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Cost price*/ 
+	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
+	[Price3] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price + VAT */ 
+	[MinQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
+	[MaxQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
+	[TotalQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
+	[Status] [nvarchar](20) NULL) 
+
+CREATE TABLE [dbo].[ConvUOMs](
+	[ConvId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[MatId] [int] NOT NULL DEFAULT 0,
+	[UOM1] [nvarchar](200) NOT NULL,
+	[XUOM1] [int] NOT NULL, 
+	[QTY1] [decimal](10, 2) NOT NULL,
+	[UOM2] [nvarchar](200) NOT NULL,
+	[YUOM2] [int] NOT NULL, 
+	[QTY2] [decimal](10, 2) NOT NULL,
+	[Status] [nvarchar](20) NULL) 
+	/* (XUOM1 * QTY1)[UOM1] = (YUOM2 * QTY2)[UOM2]  */
+
+CREATE TABLE [dbo].[Transactions](
+	[TrnId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Date1] [int] NOT NULL DEFAULT 0,
+	[MatId] [int] NOT NULL DEFAULT 0,
+	[Batch1] [nvarchar](50) NULL,
+	[Direction] [nvarchar](100) NOT NULL,   /*IN or OUT*/
+	[TrnQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
+	[UOM1] [nvarchar](200) NOT NULL, /* Base Unit Of measuer   */ 
+	[Price1] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Cost price*/ 
+	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
+	[Price3] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price + VAT */ 
+	[Status] [nvarchar](20) NULL) 
