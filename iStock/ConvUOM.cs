@@ -14,7 +14,7 @@ namespace iStock
         public int MatId { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(20)]
         public string UOM1 { get; set; }
 
         public int XUOM1 { get; set; }
@@ -22,7 +22,7 @@ namespace iStock
         public decimal QTY1 { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(20)]
         public string UOM2 { get; set; }
 
         public int YUOM2 { get; set; }

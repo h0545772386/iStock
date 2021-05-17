@@ -7,8 +7,8 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
-                 Height="450"
-                 Width="800"
+                 Height="290"
+                 Width="600"
                  FlowDirection="RightToLeft"
                  WindowStartupLocation="CenterScreen"
                  ContentRendered="MetroWindow_ContentRendered">
@@ -20,7 +20,7 @@
             <GradientStop Color="#FF76899E" />
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
-    <Grid>
+    <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
@@ -57,9 +57,11 @@
             <TextBox x:Name="tbMatId"
                      Margin="3"
                      Width="164"
-                     Text="{Binding MatId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     BorderBrush="Black"
+                     BorderThickness="1.64"
                      HorizontalAlignment="Left"
-                     VerticalAlignment="Center" />
+                     VerticalAlignment="Center"
+                     Text="{Binding MatId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <TextBlock Text="*"
                        FontWeight="ExtraBold"
                        Foreground="Red"
@@ -80,162 +82,87 @@
             <TextBox x:Name="tbMatName"
                      Margin="3"
                      Width="420"
-                     Text="{Binding Name1, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     BorderBrush="Black"
+                     BorderThickness="1.64"
                      HorizontalAlignment="Left"
-                     VerticalAlignment="Center" />
+                     VerticalAlignment="Center"
+                     Text="{Binding Name1, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
             <TextBlock Text="*"
                        FontWeight="ExtraBold"
                        Foreground="Red"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed" />
         </StackPanel>
         <TextBlock  Grid.Column="0"
                     Grid.Row="2"
                     Margin="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Text="מחיר ללקוח" />
-        <StackPanel Grid.Column="1"
-                    Grid.Row="2"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-            <TextBox Name="tbPrice"
-                     Margin="3"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Width="164"
-                     Text="{Binding Price, Mode=TwoWay,FallbackValue=0}" />
-            <TextBlock Name="tb3"
-                       Text="*"
-                       FontWeight="ExtraBold"
-                       Foreground="Red"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" />
-        </StackPanel>
-        <TextBlock  Grid.Column="0"
-                    Grid.Row="3"
-                    Margin="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="מחיר עלות" />
-        <StackPanel Grid.Column="1"
-                    Grid.Row="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-            <TextBox Name="tbPrice2"
-                     Margin="3"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Width="164"
-                     Text="{Binding Price2, Mode=TwoWay,FallbackValue=0}" />
-            <TextBlock Text="לא כולל מע''מ"
-                       FontWeight="ExtraBold"
-                       Foreground="Red"
-                       FontSize="14"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center" />
-        </StackPanel>
-        <TextBlock  Grid.Column="0"
-                    Grid.Row="4"
-                    Margin="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="כמות במלאי" />
-        <TextBox Name="tbTotalQTY"
+                    Text="ברקוד חומר" />
+        <TextBox Name="tbBarCode"
                  Grid.Column="1"
-                 Grid.Row="4"
+                 Grid.Row="2"
                  Margin="3"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Center"
                  Width="164"
-                 Text="{Binding TotalQTY, Mode=TwoWay,FallbackValue=0}" />
+                 BorderBrush="Black"
+                 BorderThickness="1.64"
+                 Text="{Binding BarCode, Mode=TwoWay}" />
         <TextBlock  Grid.Column="0"
-                    Grid.Row="5"
+                    Grid.Row="3"
                     Margin="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Text="מלאי מינימום" />
         <TextBox Name="tbMinQTY"
                  Grid.Column="1"
-                 Grid.Row="5"
+                 Grid.Row="3"
                  Margin="3"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Center"
                  Width="164"
-                 Text="{Binding MinQTY, Mode=TwoWay,FallbackValue=0}" />
+                 BorderBrush="Black"
+                 BorderThickness="1.64"
+                 Text="{Binding MaxQTY, Mode=TwoWay,FallbackValue=0}" />
         <TextBlock  Grid.Column="0"
-                    Grid.Row="6"
+                    Grid.Row="4"
                     Margin="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Text="ברקוד חומר" />
-        <StackPanel  Grid.Column="1"
-                     Grid.Row="6"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Orientation="Horizontal">
-            <TextBox Name="tbBarCode"
-                     Margin="3"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Width="164"
-                     Text="{Binding BarCode, Mode=TwoWay}" />
-            <!--Click="bPrintBarcode_Click"-->
-            <!--<Button Name="bPrintBarcode"
-                  
-                    Style="{StaticResource RoundCorner}"
-                    Margin="5 0 0 0"
-                    Visibility="{Binding Source={x:Static prop:Settings.Default},
-                                         Path=ShowPrintButton,
-                                         Converter={StaticResource BooleanToVisibilityConverter}}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text=" הדפס"
-                               VerticalAlignment="Center"
-                               FontSize="13" />
-                    <TextBox x:Name="tbLabels"
-                             Width="46"
-                             FontSize="13"
-                             Margin="5 0 5 0"
-                             Text="12"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center" />
-                    <Image Source="Images/print26px.png"
-                           Margin="0 0 5 0" />-->
-            <!--</StackPanel>-->
-            <!--</Button>-->
-        </StackPanel>
-        <TextBlock  Grid.Column="0"
-                    Grid.Row="7"
-                    Margin="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="שם ספק" />
-        <TextBox Name="tbSuplName"
+                    Text="מלאי מקסימאלי" />
+        <TextBox Name="tbMaxQTY"
                  Grid.Column="1"
-                 Grid.Row="7"
+                 Grid.Row="4"
                  Margin="3"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Center"
-                 Width="300"
-                 Text="{Binding SuplName, Mode=TwoWay}" />
-        <TextBlock Text="סמן למחיקה:"
-                   x:Name="tbDeleted"
+                 Width="164"
+                 BorderBrush="Black"
+                 BorderThickness="1.64"
+                 Text="{Binding MinQTY, Mode=TwoWay,FallbackValue=0}" />
+        <TextBlock VerticalAlignment="Center"
                    Grid.Column="0"
-                   Grid.Row="8"
+                   Grid.Row="7"
                    Margin="3"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Visibility="Collapsed" />
-        <CheckBox x:Name="cb_Deleted"
-                  Grid.Column="2"
-                  Grid.Row="8"
+                   Text="סטטוס" />
+        <ComboBox Name="cbStatus"
+                  Grid.Row="7"
+                  Grid.Column="1"
+                  IsEditable="False"
                   Margin="3"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"
-                  Visibility="Collapsed"
-                  IsChecked="{Binding Deleted, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                  Width="164"
+                  BorderBrush="Black"
+                  BorderThickness="1.64"
+                  SelectedValuePath="Content"
+                  SelectedValue="{Binding Status}"
+                  SelectedIndex="0">
+            <ComboBoxItem Content="פעיל" />
+            <ComboBoxItem Content="סגור" />
+        </ComboBox>
         <StackPanel  Grid.Row="9"
                      Grid.ColumnSpan="2"
                      Grid.Column="0"
@@ -244,7 +171,10 @@
                      Margin="0 11 0 0">
             <Button Name="bSave"
                     Width="114"
-                    Height="40">
+                    Height="40"
+                    BorderBrush="Black"
+                    BorderThickness="1.64"
+                    Click="BSave_Click" >
                 <TextBlock Text="שמור"
                            FontSize="19"
                            FontWeight="Bold"
@@ -254,7 +184,10 @@
             <Button Name="bExit"
                     Width="114"
                     Height="40"
-                    Margin="8,0,0,0">
+                    Margin="8,0,0,0"
+                    BorderBrush="Black"
+                    BorderThickness="1.64"
+                    Click="BExit_Click">
                 <TextBlock Text="סגור"
                            FontSize="19"
                            FontWeight="Bold"

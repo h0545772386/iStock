@@ -17,14 +17,18 @@
                              StartPoint="0.5,0">
             <GradientStop Color="Black"
                           Offset="0" />
-            <GradientStop Color="#FF76899E" />
+            <GradientStop Color="#FA76899E" />
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
-    <Grid>
+    <Grid Margin="3">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -34,7 +38,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>            
+            </Grid.ColumnDefinitions>
             <TextBlock Text="חיפוש"
                        Grid.Row="1"
                        Grid.Column="0"
@@ -45,6 +49,8 @@
                      Grid.Column="1"
                      Width="300"
                      Margin="3"
+                     BorderBrush="Black"
+                     BorderThickness="1.64"
                      HorizontalAlignment="Left"
                      TextChanged="TbSearch_TextChanged" />
             <TextBlock Text="כלול לא פעילים"
@@ -61,6 +67,8 @@
                       Width="300"
                       FontSize="16"
                       Margin="3"
+                      BorderBrush="Black"
+                      BorderThickness="1.64"
                       Checked="cbAll_Checked"
                       Unchecked="cbAll_Unchecked" />
         </Grid>
@@ -94,7 +102,7 @@
                     <Style TargetType="{x:Type DataGridRow}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Status}"
-                                         Value="InActive">
+                                         Value="סגור">
                                 <Setter Property="Foreground"
                                         Value="Tomato" />
                             </DataTrigger>
@@ -118,8 +126,8 @@
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridHyperlinkColumn Width="Auto"
-                                             Binding="{Binding Path=DeprId}"
-                                             Header="מס מחלקה">
+                                             Binding="{Binding Path=MatId}"
+                                             Header="מזהה חומר">
                         <DataGridHyperlinkColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <EventSetter Event="Hyperlink.Click"
@@ -128,13 +136,45 @@
                         </DataGridHyperlinkColumn.ElementStyle>
                     </DataGridHyperlinkColumn>
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=DeprName}"
-                                        Header="שם מחלקה" />
+                                        Binding="{Binding Path=Name1}"
+                                        Header="תאור חומר" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=DeprDescr}"
-                                        Header="הערות" />
+                                        Binding="{Binding Path=TotalQTY}"
+                                        Header="כמות" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
+        <StackPanel Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Width="104">
+            <Button Name="bAddMaterial"
+                    BorderBrush="Black"
+                    BorderThickness="1.64"
+                    Click="BAddMaterial_Click">
+                <Button.ToolTip>
+                    <TextBlock Text="הוסף חומר חדש" />
+                </Button.ToolTip>
+                <TextBlock Text="חומר חדש"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Button>
+            <Button Name="bLoadCSV"
+                    BorderBrush="Black"
+                    BorderThickness="1.64"
+                    Click="BLoadCSV_Click">
+                <Button.ToolTip>
+                    <TextBlock Text="טעינת תנועות מקובץ" />
+                </Button.ToolTip>
+
+                <TextBlock Text="טעינה מקבוץ"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Button>
+        </StackPanel>
     </Grid>
 </mah:MetroWindow>

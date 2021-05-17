@@ -33,11 +33,11 @@ namespace iStock
         public string BrCode2 { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(20)]
         public string UOM1 { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(20)]
         public string UOM2 { get; set; }
 
         [Required]

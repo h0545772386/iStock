@@ -9,9 +9,17 @@ namespace iStock
     /// </summary>
     public partial class MaterialW : MetroWindow
     {
-        public MaterialW()
+        private Material m;
+        public MaterialW(Material m = null)
         {
             InitializeComponent();
+            if (m == null)
+            {
+                m = new Material();
+            }
+
+            this.m = m;
+            this.DataContext = m;
         }
 
         private void MetroWindow_ContentRendered(object sender, EventArgs e)
@@ -43,33 +51,41 @@ namespace iStock
             //DGDepers.ItemsSource = LD;
         }
 
-        private void TbSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void BSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (Check())
+            {
+                if (m.MatId == 0)
+                {
+                    Create();
+                }
+                else
+                {
+                    UPdate();
+                }
+            }
+        }
+
+        private bool Check()
+        {
+            return true;
+        }
+
+        private void Create()
         {
 
         }
 
-        private void cbAll_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void UPdate()
         {
 
         }
 
-        private void cbAll_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        private void BExit_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-        private void OnHyperlinkClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DGMaterials_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void BExitk_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
+            this.Close();
+            this.Owner.Activate();
+            return;
         }
     }
 }

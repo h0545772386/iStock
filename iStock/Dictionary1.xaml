@@ -28,9 +28,9 @@
         <Setter Property="FontFamily"
                 Value="Arial" />
         <Setter Property="BorderBrush"
-                Value="Black" />
+                Value="Purple" />
         <Setter Property="BorderThickness"
-                Value="1" />
+                Value="4.64" />
     </Style>
 
     <Style TargetType="PasswordBox">

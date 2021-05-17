@@ -13,6 +13,8 @@ namespace iStock
 
         public int Date1 { get; set; }
 
+        public int LoadNum { get; set; }   /* load from file numerator*/ 
+
         public int MatId { get; set; }
 
         [StringLength(50)]
@@ -20,12 +22,12 @@ namespace iStock
 
         [Required]
         [StringLength(100)]
-        public string Direction { get; set; }
+        public string Direction { get; set; }  /*IN or OUT*/
 
         public decimal TrnQTY { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(20)]
         public string UOM1 { get; set; }
 
         public decimal Price1 { get; set; }

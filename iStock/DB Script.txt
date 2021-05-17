@@ -8,8 +8,8 @@ CREATE TABLE [dbo].[Materials](
 	[Name2] [nvarchar](100) NULL,
 	[BrCode1] [nvarchar](70) NULL,
 	[BrCode2] [nvarchar](70) NULL,
-	[UOM1] [nvarchar](200) NOT NULL, /* Base Unit Of measuer   */ 
-	[UOM2] [nvarchar](200) NOT NULL, /* Sale/Purchase Unit Of measuer   */ 
+	[UOM1] [nvarchar](20) NOT NULL, /* Base Unit Of measuer   */ 
+	[UOM2] [nvarchar](20) NOT NULL, /* Sale/Purchase Unit Of measuer   */ 
 	[MName2] [nvarchar](200) NOT NULL,
 	[Price1] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Cost price*/ 
 	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
@@ -18,28 +18,34 @@ CREATE TABLE [dbo].[Materials](
 	[MaxQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
 	[TotalQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
 	[Status] [nvarchar](20) NULL) 
+create unique index i1 on Materials (BrCode1 asc ) 
 
 CREATE TABLE [dbo].[ConvUOMs](
 	[ConvId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[MatId] [int] NOT NULL DEFAULT 0,
-	[UOM1] [nvarchar](200) NOT NULL,
+	[UOM1] [nvarchar](20) NOT NULL,
 	[XUOM1] [int] NOT NULL, 
 	[QTY1] [decimal](10, 2) NOT NULL,
-	[UOM2] [nvarchar](200) NOT NULL,
+	[UOM2] [nvarchar](20) NOT NULL,
 	[YUOM2] [int] NOT NULL, 
 	[QTY2] [decimal](10, 2) NOT NULL,
 	[Status] [nvarchar](20) NULL) 
 	/* (XUOM1 * QTY1)[UOM1] = (YUOM2 * QTY2)[UOM2]  */
+create unique index i1 on ConvUOMs (MatId asc, UOM1 asc ) 
 
 CREATE TABLE [dbo].[Transactions](
 	[TrnId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Date1] [int] NOT NULL DEFAULT 0,
+	[LoadNum] [int] NOT NULL DEFAULT 0,  /* load from file numerator*/ 
 	[MatId] [int] NOT NULL DEFAULT 0,
 	[Batch1] [nvarchar](50) NULL,
 	[Direction] [nvarchar](100) NOT NULL,   /*IN or OUT*/
 	[TrnQTY] [decimal](10, 2) NOT NULL DEFAULT 0,
-	[UOM1] [nvarchar](200) NOT NULL, /* Base Unit Of measuer   */ 
+	[UOM1] [nvarchar](20) NOT NULL, /* Base Unit Of measuer   */ 
 	[Price1] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Cost price*/ 
 	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
 	[Price3] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price + VAT */ 
 	[Status] [nvarchar](20) NULL) 
+create unique index i1 on Transactions ( Date1 ASC, MatId ASC ) 
+create unique index i2 on Transactions ( MatId ASC )
+create unique index i3 on Transactions ( Direction ASC )  
