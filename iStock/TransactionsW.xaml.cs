@@ -9,13 +9,21 @@ namespace iStock
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class TransactionsW : MetroWindow
     {
-        private Material M;
-        private List<Material> LM;
-        public MainWindow()
+        private Material m;
+        private Transaction t;
+        private List<Transaction> LT;
+        public TransactionsW(Material m = null)
         {
             InitializeComponent();
+            if (m == null)
+            {
+                m = new Material();
+            }
+
+            this.m = m;
+            this.DataContext = m;
         }
 
         private void MetroWindow_ContentRendered(object sender, EventArgs e)
@@ -36,15 +44,15 @@ namespace iStock
             {
                 if (cbAll.IsChecked != true)
                 {
-                    LM = db.Materials.Where(tt => tt.Status == "פעיל").ToList();
+                    LT = db.Transactions.Where(tt => tt.MatId == m.MatId && tt.Status == "פעיל").ToList();
                 }
                 else
                 {
-                    LM = db.Materials.ToList();
+                    LT = db.Transactions.ToList();
                 }
             }
-            GBMaterials.Header = LM.Count.ToString();
-            DGMaterials.ItemsSource = LM;
+            GBTranzs.Header = LT.Count.ToString();
+            DGTranzs.ItemsSource = LT;
         }
 
         private void TbSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -63,32 +71,36 @@ namespace iStock
         }
         private void OnHyperlinkClick(object sender, RoutedEventArgs e)
         {
-            if (DGMaterials.SelectedItem == null)
+            t = null;
+            if (DGTranzs.SelectedItem == null)
             {
                 return;
             }
 
-            M = DGMaterials.SelectedItem as Material;
-            if (M == null)
+            t = DGTranzs.SelectedItem as Transaction;
+            if (t == null)
             {
                 return;
             }
-            MaterialW mw = new MaterialW(M);
+            TransactionW mw = new TransactionW(t);
             mw.Owner = this;
             mw.ShowDialog();
 
             GO();
         }
 
-        private void DGMaterials_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+
+        private void DGTranzs_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (DGMaterials.SelectedItem == null)
+            t = null;
+            if (DGTranzs.SelectedItem == null)
             {
                 return;
             }
 
-            M = DGMaterials.SelectedItem as Material;
-            if (M == null)
+            t = DGTranzs.SelectedItem as Transaction;
+            if (t == null)
             {
                 return;
             }

@@ -38,5 +38,9 @@ namespace iStock
 
         [StringLength(20)]
         public string Status { get; set; }
+
+        [NotMapped]
+        public string Name1 { get; set; }
+
     }
 }

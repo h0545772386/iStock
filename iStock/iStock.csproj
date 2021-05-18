@@ -137,11 +137,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoadCSV.cs" />
+    <Compile Include="TransactionW.xaml.cs">
+      <DependentUpon>TransactionW.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionsW.xaml.cs">
+      <DependentUpon>TransactionsW.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UploadW.xaml.cs">
+      <DependentUpon>UploadW.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MaterialW.xaml.cs">
       <DependentUpon>MaterialW.xaml</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs" />
+    <Compile Include="UTILS.cs" />
     <Page Include="Dictionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransactionW.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TransactionsW.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UploadW.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
