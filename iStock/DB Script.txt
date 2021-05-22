@@ -10,7 +10,6 @@ CREATE TABLE [dbo].[Materials](
 	[BrCode2] [nvarchar](70) NULL,
 	[UOM1] [nvarchar](20) NOT NULL, /* Base Unit Of measuer   */ 
 	[UOM2] [nvarchar](20) NOT NULL, /* Sale/Purchase Unit Of measuer   */ 
-	[MName2] [nvarchar](200) NOT NULL,
 	[Price1] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Cost price*/ 
 	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
 	[Price3] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price + VAT */ 

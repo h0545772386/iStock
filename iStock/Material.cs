@@ -40,10 +40,6 @@ namespace iStock
         [StringLength(20)]
         public string UOM2 { get; set; }
 
-        [Required]
-        [StringLength(200)]
-        public string MName2 { get; set; }
-
         public decimal Price1 { get; set; }
 
         public decimal Price2 { get; set; }
@@ -58,5 +54,26 @@ namespace iStock
 
         [StringLength(20)]
         public string Status { get; set; }
+
+        [NotMapped]
+        public string Mode { get; set; }
+
+        public Material()
+        {
+            Mode = "";
+        }
+
+        public override string ToString()
+        {
+            return
+                MatId.ToString() + "," +
+                Name1 + "," +
+                BrCode1 + "," +
+                UOM1 + "," +
+                UOM2 + "," +
+                MinQTY.ToString("0.00") + "," +
+                MaxQTY.ToString("0.00");
+        }
+
     }
 }

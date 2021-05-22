@@ -7,7 +7,7 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
-                 Height="290"
+                 Height="340"
                  Width="600"
                  ResizeMode="NoResize"
                  FlowDirection="RightToLeft"
@@ -92,8 +92,7 @@
                        FontWeight="ExtraBold"
                        Foreground="Red"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Visibility="Collapsed" />
+                       VerticalAlignment="Center" />
         </StackPanel>
         <TextBlock  Grid.Column="0"
                     Grid.Row="2"
@@ -110,7 +109,7 @@
                  Width="164"
                  BorderBrush="Black"
                  BorderThickness="1.64"
-                 Text="{Binding BarCode, Mode=TwoWay}" />
+                 Text="{Binding BrCode1, Mode=TwoWay}" />
         <TextBlock  Grid.Column="0"
                     Grid.Row="3"
                     Margin="3"
@@ -126,7 +125,7 @@
                  Width="164"
                  BorderBrush="Black"
                  BorderThickness="1.64"
-                 Text="{Binding MaxQTY, Mode=TwoWay,FallbackValue=0}" />
+                 Text="{Binding MinQTY, Mode=TwoWay,FallbackValue=0.0}" />
         <TextBlock  Grid.Column="0"
                     Grid.Row="4"
                     Margin="3"
@@ -142,7 +141,55 @@
                  Width="164"
                  BorderBrush="Black"
                  BorderThickness="1.64"
-                 Text="{Binding MinQTY, Mode=TwoWay,FallbackValue=0}" />
+                 Text="{Binding MaxQTY, Mode=TwoWay,FallbackValue=0.0}" />
+        <TextBlock VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="5"
+                   Margin="3"
+                   Text="יח' מידה בסיס" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="5"
+                    Grid.Column="1">
+            <ComboBox Name="cbUOM1"
+                      IsEditable="False"
+                      Margin="3"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Width="164"
+                      BorderBrush="Black"
+                      BorderThickness="1.64"
+                      ItemsSource="{Binding}"
+                      SelectedValuePath="Name1"
+                      DisplayMemberPath="Name1"
+                      SelectedValue="{ Binding UOM1 }"
+                      DropDownClosed="CbUOM1_DropDownClosed" />
+            <TextBlock Margin="3"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Text="לצורך חישוב מלאי"
+                       Foreground="Red" />
+        </StackPanel>
+        <TextBlock VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="6"
+                   Margin="3"
+                   Text="יח' מכירה/רכש" 
+                   Visibility="Collapsed"/>
+        <ComboBox Name="cbUOM2"
+                  Grid.Row="6"
+                  Grid.Column="1"
+                  IsEditable="False"
+                  Margin="3"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Width="164"
+                  BorderBrush="Black"
+                  BorderThickness="1.64"
+                  ItemsSource="{Binding}"
+                  SelectedValuePath="Name1"
+                  DisplayMemberPath="Name1"
+                  SelectedValue="{ Binding UOM2 }"
+                  Visibility="Collapsed" />
         <TextBlock VerticalAlignment="Center"
                    Grid.Column="0"
                    Grid.Row="7"
@@ -175,7 +222,7 @@
                     Height="40"
                     BorderBrush="Black"
                     BorderThickness="1.64"
-                    Click="BSave_Click" >
+                    Click="BSave_Click">
                 <TextBlock Text="שמור"
                            FontSize="19"
                            FontWeight="Bold"

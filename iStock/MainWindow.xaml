@@ -21,6 +21,22 @@
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
     <Grid Margin="3">
+        <Grid.Resources>
+            <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="LightSeaGreen" />
+                    </Trigger>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Foreground"
+                                Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -136,11 +152,20 @@
                         </DataGridHyperlinkColumn.ElementStyle>
                     </DataGridHyperlinkColumn>
                     <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=BrCode1}"
+                                        Header="ברקוד" />
+                    <DataGridTextColumn Width="Auto"
                                         Binding="{Binding Path=Name1}"
                                         Header="תאור חומר" />
                     <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=MinQTY}"
+                                        Header="כמות מינ'" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=MaxQTY}"
+                                        Header="כמות מקס'" />
+                    <DataGridTextColumn Width="Auto"
                                         Binding="{Binding Path=TotalQTY}"
-                                        Header="כמות" />
+                                        Header="מלאי" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

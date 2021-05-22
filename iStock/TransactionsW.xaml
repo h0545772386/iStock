@@ -21,6 +21,22 @@
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
     <Grid Margin="3">
+        <Grid.Resources>
+            <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="LightSeaGreen" />
+                    </Trigger>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Foreground"
+                                Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

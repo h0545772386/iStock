@@ -21,6 +21,22 @@
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
     <Grid Margin="3">
+        <Grid.Resources>
+            <Style TargetType="DataGridCell">
+                <Style.Triggers>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="LightSeaGreen" />
+                    </Trigger>
+                    <Trigger Property="DataGridCell.IsSelected"
+                             Value="True">
+                        <Setter Property="Foreground"
+                                Value="Black" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -146,7 +162,7 @@
                                         Header="כמות" />
                     <DataGridTextColumn Width="Auto"
                                         Binding="{Binding Path=Direction}"
-                                        Header="IN/OUT" />                    
+                                        Header="IN/OUT" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
@@ -172,6 +188,19 @@
                     HorizontalAlignment="Left"
                     Click="bBack_Click"
                     Content="חזרה"
+                    FontSize="14"
+                    Height="40"
+                    Width="140"
+                    FontWeight="Medium"
+                    BorderBrush="Black"
+                    BorderThickness="1.64" />
+            <Button Name="bCreateFile"
+                    Margin="3"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Click="BCreateFile_Click"
+                    Content="צור קובץ CSV"
                     FontSize="14"
                     Height="40"
                     Width="140"

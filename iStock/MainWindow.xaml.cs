@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace iStock
@@ -19,11 +21,11 @@ namespace iStock
         }
 
         private void MetroWindow_ContentRendered(object sender, EventArgs e)
-        {
+        {           
             GO();
         }
         private void GO()
-        {
+        { 
             var lw = this.Dispatcher.BeginInvoke(new Action(() =>
             {
                 GetRecords();
@@ -105,7 +107,6 @@ namespace iStock
             MaterialW mw = new MaterialW();
             mw.Owner = this;
             mw.ShowDialog();
-
             GO();
         }
 
@@ -114,7 +115,6 @@ namespace iStock
             UploadW uw = new UploadW();
             uw.Owner = this;
             uw.ShowDialog();
-
             GO();
         }
     }

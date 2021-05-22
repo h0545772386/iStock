@@ -45,5 +45,15 @@ namespace iStock
                 m = db.Materials.FirstOrDefault(tt => tt.MatId == t.MatId);
             }
         }
+
+        private void BSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

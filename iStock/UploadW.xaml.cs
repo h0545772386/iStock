@@ -1,5 +1,10 @@
 ﻿using MahApps.Metro.Controls;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 
@@ -58,102 +63,46 @@ namespace iStock
             return;
         }
 
-        //private void MetroWindow_ContentRendered(object sender, EventArgs e)
-        //{
-        //    GO();
-        //}
-        //private void GO()
-        //{
-        //    var lw = this.Dispatcher.BeginInvoke(new Action(() =>
-        //    {
-        //        GetRecords();
-        //    }));
-        //}
+        private void BCreateFile_Click(object sender, RoutedEventArgs e)
+        {
+            CSV();
+        }
 
-        //private void GetRecords()
-        //{
-        //    using (var db = new Model1())
-        //    {
-        //        if (cbAll.IsChecked != true)
-        //        {
-        //            LM = db.Materials.Where(tt => tt.Status == "פעיל").ToList();
-        //        }
-        //        else
-        //        {
-        //            LM = db.Materials.ToList();
-        //        }
-        //    }
-        //    GBMaterials.Header = LM.Count.ToString();
-        //    DGMaterials.ItemsSource = LM;
-        //}
+        private void CSV()
+        {
+            var lw = this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                CSV1();
+            }));
+        }
 
-        //private void TbSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        //{
+        private void CSV1()
+        {
+            Material m = null;
+            using (var db = new Model1())
+            {
+                var mat_id = db.Materials.Max(id => id.MatId);
+                m = db.Materials.FirstOrDefault(id => id.MatId == mat_id);
+            }
 
-        //}
+            if (m == null)
+            {
+                m = new Material() { MatId = 164159, Name1 = "שם חומר", BrCode1 = "1111111", UOM1 = "יחידה", UOM2 = "יחידה", MinQTY = 0, MaxQTY = 0 };
+            }
 
-        //private void cbAll_Checked(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    GO();
-        //}
+            var hdrs = "MatId,Name1,BrCode1,UOM1,UOM2,MinQTY,MaxQTY";
+            var csv = m.ToString();
 
-        //private void cbAll_Unchecked(object sender, System.Windows.RoutedEventArgs e)
-        //{
-        //    GO();
-        //}
-        //private void OnHyperlinkClick(object sender, RoutedEventArgs e)
-        //{
-        //    if (DGMaterials.SelectedItem == null)
-        //    {
-        //        return;
-        //    }
-
-        //    M = DGMaterials.SelectedItem as Material;
-        //    if (M == null)
-        //    {
-        //        return;
-        //    }
-        //    MaterialW mw = new MaterialW(M);
-        //    mw.Owner = this;
-        //    mw.ShowDialog();
-
-        //    GO();
-        //}
-
-        //private void DGMaterials_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        //{
-        //    if (DGMaterials.SelectedItem == null)
-        //    {
-        //        return;
-        //    }
-
-        //    M = DGMaterials.SelectedItem as Material;
-        //    if (M == null)
-        //    {
-        //        return;
-        //    }
-        //}
-
-        //private void BExitk_Click(object sender, System.Windows.RoutedEventArgs e)
-        //{
-
-        //}
-
-
-        //private void BAddMaterial_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MaterialW mw = new MaterialW();
-        //    mw.Owner = this;
-        //    mw.ShowDialog();
-
-        //    GO();
-        //}
-
-        //private void BLoadCSV_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //    this.Owner.Activate();
-        //    return;
-        //}
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                var path_ = saveFileDialog.FileName + ".xls";
+                using (StreamWriter sw = new StreamWriter(path_, false, Encoding.UTF8))
+                {
+                    sw.WriteLine(hdrs);
+                    sw.WriteLine(csv);
+                }
+            }
+        }
     }
 }
