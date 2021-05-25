@@ -45,12 +45,14 @@ namespace iStock
                 else
                 {
                     LM = db.Materials.ToList();
+                    LT = db.Transactions.Where(tt => tt.Status == "פעיל").ToList();
                 }
             }
             LM = LM.OrderBy(x => x.Name1).ToList();
-            LM.ForEach(
-                tt => tt.TotalQTY = LT.Where(x => x.MatId == tt.MatId && x.Direction == "IN").Sum(y => y.TrnQTY) -
-                                    LT.Where(x => x.MatId == tt.MatId && x.Direction == "OUT").Sum(y => y.TrnQTY)
+
+            LM.ForEach(tt => tt.TotalQTY =
+                LT.Where(x => x.MatId == tt.MatId && x.Direction == "IN").Sum(y => y.TrnQTY) -
+                LT.Where(x => x.MatId == tt.MatId && x.Direction == "OUT").Sum(y => y.TrnQTY)
                 );
             GBMaterials.Header = LM.Count.ToString();
             DGMaterials.ItemsSource = LM;

@@ -75,5 +75,9 @@ namespace iStock
                 MaxQTY.ToString("0.00");
         }
 
+        internal decimal CalcTotal(List<Material> lM)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
