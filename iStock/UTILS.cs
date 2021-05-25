@@ -22,7 +22,7 @@ namespace iStock
                 e.Handled = true;
             }
         }
-                
+
         public static string DateToString_YYYYMMDD(this DateTime d)
         {
             int Year = d.Year;
@@ -71,6 +71,22 @@ namespace iStock
             int Month = (YYYYMMDD / 100) % 100;
             int Day = YYYYMMDD % 100;
             return new DateTime(Year, Month, Day);
+        }
+
+        public static string Int2Date_YYYYMMDD(this int YYYYMMDD)
+        {
+            if (YYYYMMDD == 0)
+            {
+                return "";
+            }
+
+            string result = "{0}/{1}/{2}";
+            string str_YYYYMMDD = YYYYMMDD.ToString();
+            string Year = str_YYYYMMDD.Substring(0, 4);
+            string Month = str_YYYYMMDD.Substring(4, 2);
+            string Day = str_YYYYMMDD.Substring(6, 2);
+
+            return string.Format(result, Day, Month, Year);
         }
 
         public static int GetMonthFromYYYYMMDD(this int YYYYMMDD)

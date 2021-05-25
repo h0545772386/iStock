@@ -45,6 +45,6 @@ CREATE TABLE [dbo].[Transactions](
 	[Price2] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price*/ 
 	[Price3] [decimal](10, 2) NOT NULL DEFAULT 0,   /* Sale price + VAT */ 
 	[Status] [nvarchar](20) NULL) 
-create unique index i1 on Transactions ( Date1 ASC, MatId ASC ) 
-create unique index i2 on Transactions ( MatId ASC )
-create unique index i3 on Transactions ( Direction ASC )  
+create index i1 on Transactions ( Date1 ASC, MatId ASC ) 
+create index i2 on Transactions ( MatId ASC )
+create index i3 on Transactions ( Direction ASC )  

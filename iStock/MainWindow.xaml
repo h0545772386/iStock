@@ -7,9 +7,12 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
+                 Icon="Images/2.256x256 transparent.ico"
                  Height="450"
                  Width="800"
                  FlowDirection="RightToLeft"
+                 WindowState="Maximized"
+                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
                  ContentRendered="MetroWindow_ContentRendered">
     <mah:MetroWindow.Background>
@@ -20,6 +23,9 @@
             <GradientStop Color="#FA76899E" />
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
+    <Window.Resources>
+        <local:Fonts x:Key="FntSize" />
+    </Window.Resources>
     <Grid Margin="3">
         <Grid.Resources>
             <Style TargetType="DataGridCell">
@@ -41,27 +47,23 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="חיפוש"
-                       Grid.Row="1"
+                       Grid.Row="0"
                        Grid.Column="0"
                        Margin="3"
                        VerticalAlignment="Center" />
             <TextBox Name="tbSearch"
-                     Grid.Row="1"
+                     Grid.Row="0"
                      Grid.Column="1"
                      Width="300"
                      Margin="3"
@@ -73,11 +75,11 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="3"
-                       Grid.Row="2"
+                       Grid.Row="1"
                        Grid.Column="0" />
             <CheckBox Name="cbAll"
                       Grid.Column="1"
-                      Grid.Row="2"
+                      Grid.Row="1"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
                       Width="300"
@@ -87,6 +89,69 @@
                       BorderThickness="1.64"
                       Checked="cbAll_Checked"
                       Unchecked="cbAll_Unchecked" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2">
+                    <Button Name="bAddMaterial"
+                            BorderBrush="Black"
+                            BorderThickness="1.64"
+                            Click="BAddMaterial_Click"
+                            Width="164">
+                        <Button.ToolTip>
+                            <TextBlock Text="הוסף חומר חדש" />
+                        </Button.ToolTip>
+                        <TextBlock Text="חומר חדש"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Button>
+                    <Button Name="bTranzs"
+                            BorderBrush="Black"
+                            BorderThickness="1.64"
+                        Click="BTranzs_Click"
+                        Width="164">
+                        <Button.ToolTip>
+                            <TextBlock Text="הצג תנועות חומרים" />
+                        </Button.ToolTip>
+                        <TextBlock Text="הצג תנועות"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Button>
+                <Button Name="bAddTranz"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BAddTranz_Click"
+                        Width="164">
+                    <Button.ToolTip>
+                        <TextBlock Text="הצג תנועות חומרים" />
+                    </Button.ToolTip>
+                    <TextBlock Text="תנועוה"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bLoadCSV"
+                            BorderBrush="Black"
+                            BorderThickness="1.64"
+                        Click="BLoadCSV_Click"
+                        Width="164"
+                            Visibility="Collapsed">
+                        <Button.ToolTip>
+                            <TextBlock Text="טעינת תנועות מקובץ" />
+                        </Button.ToolTip>
+
+                        <TextBlock Text="טעינה מקבוץ"
+                                   FontSize="14"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
+                    </Button>
+            </StackPanel>                        
         </Grid>
         <GroupBox Name="GBMaterials"
                   Margin="0 8 0 0"
@@ -106,8 +171,8 @@
                       SelectionMode="Single"
                       ItemsSource="{Binding}"
                       AlternatingRowBackground="AliceBlue"
-                      FontSize="14"
-                      FontWeight="Medium"
+                      FontSize="{Binding Source={StaticResource FntSize}, Path=GridFont}"
+                      FontWeight="Medium"                      
                       GridLinesVisibility="All"
                       EnableRowVirtualization="True"
                       EnableColumnVirtualization="True"
@@ -169,37 +234,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        <StackPanel Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Width="104">
-            <Button Name="bAddMaterial"
-                    BorderBrush="Black"
-                    BorderThickness="1.64"
-                    Click="BAddMaterial_Click">
-                <Button.ToolTip>
-                    <TextBlock Text="הוסף חומר חדש" />
-                </Button.ToolTip>
-                <TextBlock Text="חומר חדש"
-                           FontSize="14"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
-            </Button>
-            <Button Name="bLoadCSV"
-                    BorderBrush="Black"
-                    BorderThickness="1.64"
-                    Click="BLoadCSV_Click">
-                <Button.ToolTip>
-                    <TextBlock Text="טעינת תנועות מקובץ" />
-                </Button.ToolTip>
-
-                <TextBlock Text="טעינה מקבוץ"
-                           FontSize="14"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
-            </Button>
-        </StackPanel>
+        
     </Grid>
 </mah:MetroWindow>

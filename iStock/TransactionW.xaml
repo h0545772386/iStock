@@ -7,10 +7,12 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
-                 Height="270"
+                 Icon="Images/2.256x256 transparent.ico"
+                 Height="330"
                  Width="600"
                  ResizeMode="NoResize"
                  FlowDirection="RightToLeft"
+                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
                  ContentRendered="MetroWindow_ContentRendered">
     <mah:MetroWindow.Background>
@@ -21,12 +23,16 @@
             <GradientStop Color="#FA76899E" />
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
+    <Window.Resources>
+        <local:Int2DateConverter x:Key="Int2Date" />
+    </Window.Resources>
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -94,15 +100,35 @@
                  Width="164"
                  BorderBrush="Black"
                  BorderThickness="1.64"
-                 Text="{Binding TrnQTY, Mode=TwoWay}" />
+                 Text="{Binding TrnQTY, Mode=TwoWay,FallbackValue= 0}"
+                 PreviewTextInput="TbTrnQTY_PreviewTextInput" />
+        <TextBlock VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="3"
+                   Margin="3"
+                   Text="יחידות" />
+        <ComboBox Name="cbUOM1"
+                  Grid.Row="3"
+                  Grid.Column="1"
+                  IsEditable="False"
+                  Margin="3"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Width="164"
+                  BorderBrush="Black"
+                  BorderThickness="1.64"
+                  ItemsSource="{Binding}"
+                  SelectedValuePath="Name1"
+                  DisplayMemberPath="Name1"
+                  SelectedValue="{ Binding UOM1 }" />
         <TextBlock  Grid.Column="0"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Margin="3"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Text="הכנסה / הוצאה" />
         <ComboBox Name="cbInOut"
-                  Grid.Row="3"
+                  Grid.Row="4"
                   Grid.Column="1"
                   IsEditable="False"
                   Margin="3"
@@ -116,14 +142,14 @@
                   SelectedIndex="0">
             <ComboBoxItem Content="IN" />
             <ComboBoxItem Content="OUT" />
-        </ComboBox>        
+        </ComboBox>
         <TextBlock VerticalAlignment="Center"
                    Grid.Column="0"
-                   Grid.Row="4"
+                   Grid.Row="5"
                    Margin="3"
                    Text="סטטוס" />
         <ComboBox Name="cbStatus"
-                  Grid.Row="4"
+                  Grid.Row="5"
                   Grid.Column="1"
                   IsEditable="False"
                   Margin="3"
@@ -138,7 +164,41 @@
             <ComboBoxItem Content="פעיל" />
             <ComboBoxItem Content="סגור" />
         </ComboBox>
-        <StackPanel  Grid.Row="5"
+        <TextBlock VerticalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="6"
+                   Margin="3"
+                   Text="תאריך תנועה" />
+        <StackPanel  Grid.Row="6"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Orientation="Horizontal">
+            <Button Name="bPrev"
+                    Style="{StaticResource RButton}"
+                    Width="26"
+                    Height="26"
+                    Click="BPrev_Click">
+                <Image Source="Images/back.png" />
+            </Button>
+            <DatePicker Name="dpDate1"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Margin="0 3 0 3"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Width="164"
+                        BorderBrush="Black"
+                        BorderThickness="1.64" />
+            <!--  SelectedDate="{Binding Date1, Converter={StaticResource Int2Date}}" />-->
+            <Button Name="bNext"
+                    Style="{StaticResource RButton}"
+                    Width="26"
+                    Height="26"
+                    Click="BNext_Click">
+                <Image Source="Images/next.png" />
+            </Button>
+        </StackPanel>
+        <StackPanel  Grid.Row="7"
                      Grid.ColumnSpan="2"
                      Grid.Column="0"
                      Orientation="Horizontal"

@@ -40,7 +40,15 @@ namespace iStock
         public string Status { get; set; }
 
         [NotMapped]
+        public string Mode { get; set; }
+
+        [NotMapped]
         public string Name1 { get; set; }
 
+        public Transaction()
+        {
+            Mode = "";
+            Name1 = "";
+        }
     }
 }

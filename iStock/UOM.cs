@@ -26,7 +26,6 @@ namespace iStock
             this.Add(new UOM() { Id = 20, Sort = 4, Numer = 1, Name1 = "מלילטר" });
             this.Add(new UOM() { Id = 21, Sort = 4, Numer = 1, Name1 = "לטר" });
             this.Add(new UOM() { Id = 22, Sort = 4, Numer = 1, Name1 = "קוב" });
-
         }
     }
 }

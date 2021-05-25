@@ -7,11 +7,15 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
+                 Icon="Images/2.256x256 transparent.ico"
                  Height="450"
                  Width="800"
                  FlowDirection="RightToLeft"
+                 WindowState="Maximized"
+                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
-                 ContentRendered="MetroWindow_ContentRendered">
+                 ContentRendered="MetroWindow_ContentRendered"
+                 Closed="MetroWindow_Closed">
     <mah:MetroWindow.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
@@ -20,6 +24,10 @@
             <GradientStop Color="#FA76899E" />
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
+    <Window.Resources>
+        <local:Int2DateConverter x:Key="Int2Date" />
+        <local:Fonts x:Key="FntSize" />
+    </Window.Resources>
     <Grid Margin="3">
         <Grid.Resources>
             <Style TargetType="DataGridCell">
@@ -40,24 +48,24 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-        </Grid.RowDefinitions>       
+        </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="חיפוש"
-                       Grid.Row="1"
+                       Grid.Row="0"
                        Grid.Column="0"
                        Margin="3"
                        VerticalAlignment="Center" />
             <TextBox Name="tbSearch"
-                     Grid.Row="1"
+                     Grid.Row="0"
                      Grid.Column="1"
                      Width="300"
                      Margin="3"
@@ -69,11 +77,11 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        Margin="3"
-                       Grid.Row="2"
+                       Grid.Row="1"
                        Grid.Column="0" />
             <CheckBox Name="cbAll"
                       Grid.Column="1"
-                      Grid.Row="2"
+                      Grid.Row="1"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
                       Width="300"
@@ -83,6 +91,25 @@
                       BorderThickness="1.64"
                       Checked="cbAll_Checked"
                       Unchecked="cbAll_Unchecked" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="2">
+                <Button Name="bAddNew"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BAddNew_Click"
+                        Width="164">
+                    <Button.ToolTip>
+                        <TextBlock Text="הוסף חומר חדש" />
+                    </Button.ToolTip>
+                    <TextBlock Text="תנועה"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
         </Grid>
         <GroupBox Name="GBTranzs"
                   Margin="0 8 0 0"
@@ -102,7 +129,7 @@
                       SelectionMode="Single"
                       ItemsSource="{Binding}"
                       AlternatingRowBackground="AliceBlue"
-                      FontSize="14"
+                      FontSize="{Binding Source={StaticResource FntSize}, Path=GridFont}"
                       FontWeight="Medium"
                       GridLinesVisibility="All"
                       EnableRowVirtualization="True"
@@ -138,8 +165,8 @@
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridHyperlinkColumn Width="Auto"
-                                             Binding="{Binding Path=MatId}"
-                                             Header="מזהה חומר">
+                                             Binding="{Binding Path=TrnId}"
+                                             Header="תנועה">
                         <DataGridHyperlinkColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <EventSetter Event="Hyperlink.Click"
@@ -148,13 +175,25 @@
                         </DataGridHyperlinkColumn.ElementStyle>
                     </DataGridHyperlinkColumn>
                     <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Date1, Converter={StaticResource Int2Date}}"
+                                        Header="תשל' אחרון" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=MatId}"
+                                        Header="מזהה חומר" />
+                    <DataGridTextColumn Width="Auto"
                                         Binding="{Binding Path=Name1}"
                                         Header="תאור חומר" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=TotalQTY}"
+                                        Binding="{Binding Path=Direction}"
+                                        Header="IN/OUT" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=TrnQTY}"
                                         Header="כמות" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Path=UOM1}"
+                                        Header="יחידה" />
                 </DataGrid.Columns>
             </DataGrid>
-        </GroupBox>        
+        </GroupBox>
     </Grid>
 </mah:MetroWindow>

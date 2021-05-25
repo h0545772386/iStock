@@ -7,9 +7,12 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
+                 Icon="Images/2.256x256 transparent.ico"
                  Height="450"
                  Width="800"
                  FlowDirection="RightToLeft"
+                 WindowState="Maximized"
+                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
                  ContentRendered="MetroWindow_ContentRendered">
     <mah:MetroWindow.Background>

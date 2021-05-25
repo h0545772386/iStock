@@ -42,5 +42,22 @@ namespace iStock
                 return false;
             }
         }
+
+        public static int GetLoadNum()
+        {
+            int trnid = 0;
+            Transaction t = null;
+            using (var db = new Model1())
+            {
+                trnid = db.Transactions.Max(x => x.TrnId);
+                t = db.Transactions.FirstOrDefault(x => x.TrnId == trnid);
+            }
+
+            if (t != null)
+            {
+                return t.LoadNum + 7;
+            }
+            return 164;
+        }
     }
 }

@@ -7,9 +7,11 @@
                  xmlns:local="clr-namespace:iStock"
                  mc:Ignorable="d"
                  Title="iStock"
+                 Icon="Images/2.256x256 transparent.ico"
                  Height="264"
                  Width="400"
                  FlowDirection="RightToLeft"
+                 WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
                  ContentRendered="MetroWindow_ContentRendered">
     <mah:MetroWindow.Background>
@@ -25,36 +27,49 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <RichTextBox Name="rtbText"
-                     Grid.Row="0"
-                     Margin="3"
-                     Background="Transparent" />
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="1"
-                    HorizontalAlignment="Center">
-            <Button Name="bOK"
-                    Margin="3"
-                    HorizontalAlignment="Left"
-                    Click="BOK_Click"
-                    Content="אישור"
-                    FontSize="14"
-                    Height="40"
-                    Width="140"
-                    FontWeight="Medium"
-                    BorderBrush="Black"
-                    BorderThickness="1.64" />
-            <Button Name="bCancel"
-                    Margin="3"
-                    HorizontalAlignment="Left"
-                    Click="BCancel_Click"
-                    Content="ביטול"
-                    FontSize="14"
-                    Height="40"
-                    Width="140"
-                    FontWeight="Medium"
-                    BorderBrush="Black"
-                    BorderThickness="1.64" 
-                    Visibility="Collapsed"/>
-        </StackPanel>
-    </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <RichTextBox Name="rtbText"
+                         Margin="3"
+                         Background="Transparent" 
+                         Grid.Column="0"/>
+            <Image HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Width="64"
+                   Height="64"
+                   Source="Images/2.256x256 transparent.ico"
+                   Grid.Column="1" 
+                   Visibility="Collapsed"/>
+        </Grid>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center">
+                    <Button Name="bOK"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            Click="BOK_Click"
+                            Content="אישור"
+                            FontSize="14"
+                            Height="40"
+                            Width="140"
+                            FontWeight="Medium"
+                            BorderBrush="Black"
+                            BorderThickness="1.64" />
+                    <Button Name="bCancel"
+                            Margin="3"
+                            HorizontalAlignment="Left"
+                            Click="BCancel_Click"
+                            Content="ביטול"
+                            FontSize="14"
+                            Height="40"
+                            Width="140"
+                            FontWeight="Medium"
+                            BorderBrush="Black"
+                            BorderThickness="1.64"
+                            Visibility="Collapsed" />
+                </StackPanel>
+        </Grid>
 </mah:MetroWindow>
