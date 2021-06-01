@@ -171,5 +171,10 @@ namespace iStock
             tw.ShowDialog();
             GO();
         }
+
+        private void bReports_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

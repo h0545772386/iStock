@@ -49,7 +49,8 @@ namespace iStock
             Transaction t = null;
             using (var db = new Model1())
             {
-                trnid = db.Transactions.Max(x => x.TrnId);
+                if (db.Transactions.ToList() != null && db.Transactions.ToList().Count > 0)
+                    trnid = db.Transactions.Max(x => x.TrnId);
                 t = db.Transactions.FirstOrDefault(x => x.TrnId == trnid);
             }
 

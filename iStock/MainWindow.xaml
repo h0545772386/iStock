@@ -9,7 +9,7 @@
                  Title="iStock"
                  Icon="Images/2.256x256 transparent.ico"
                  Height="450"
-                 Width="800"
+                 Width="900"
                  FlowDirection="RightToLeft"
                  WindowState="Maximized"
                  WindowStyle="ThreeDBorderWindow"
@@ -93,39 +93,25 @@
                         Grid.Row="0"
                         Grid.RowSpan="2"
                         Grid.Column="2">
-                    <Button Name="bAddMaterial"
-                            BorderBrush="Black"
-                            BorderThickness="1.64"
-                            Click="BAddMaterial_Click"
-                            Width="164">
-                        <Button.ToolTip>
-                            <TextBlock Text="הוסף חומר חדש" />
-                        </Button.ToolTip>
-                        <TextBlock Text="חומר חדש"
-                                   FontSize="14"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-                    </Button>
-                    <Button Name="bTranzs"
-                            BorderBrush="Black"
-                            BorderThickness="1.64"
-                        Click="BTranzs_Click"
-                        Width="164">
-                        <Button.ToolTip>
-                            <TextBlock Text="הצג תנועות חומרים" />
-                        </Button.ToolTip>
-                        <TextBlock Text="הצג תנועות"
-                                   FontSize="14"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-                    </Button>
+                <Button Name="bAddMaterial"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BAddMaterial_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="הוסף חומר חדש" />
+                    </Button.ToolTip>
+                    <TextBlock Text="חומר חדש"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
                 <Button Name="bAddTranz"
                         BorderBrush="Black"
                         BorderThickness="1.64"
                         Click="BAddTranz_Click"
-                        Width="164">
+                        Width="114">
                     <Button.ToolTip>
                         <TextBlock Text="הצג תנועות חומרים" />
                     </Button.ToolTip>
@@ -135,23 +121,51 @@
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center" />
                 </Button>
+                <Button Name="bTranzs"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BTranzs_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="הצג תנועות חומרים" />
+                    </Button.ToolTip>
+                    <TextBlock Text="הצג תנועות"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bReports"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="bReports_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="דוחות" />
+                    </Button.ToolTip>
+                    <TextBlock Text="דוחות"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
                 <Button Name="bLoadCSV"
-                            BorderBrush="Black"
-                            BorderThickness="1.64"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
                         Click="BLoadCSV_Click"
                         Width="164"
-                            Visibility="Collapsed">
-                        <Button.ToolTip>
-                            <TextBlock Text="טעינת תנועות מקובץ" />
-                        </Button.ToolTip>
+                        Visibility="Collapsed">
+                    <Button.ToolTip>
+                        <TextBlock Text="טעינת תנועות מקובץ" />
+                    </Button.ToolTip>
 
-                        <TextBlock Text="טעינה מקבוץ"
-                                   FontSize="14"
-                                   FontWeight="Bold"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
-                    </Button>
-            </StackPanel>                        
+                    <TextBlock Text="טעינה מקבוץ"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+            </StackPanel>
         </Grid>
         <GroupBox Name="GBMaterials"
                   Margin="0 8 0 0"
@@ -172,7 +186,7 @@
                       ItemsSource="{Binding}"
                       AlternatingRowBackground="AliceBlue"
                       FontSize="{Binding Source={StaticResource FntSize}, Path=GridFont}"
-                      FontWeight="Medium"                      
+                      FontWeight="Medium"
                       GridLinesVisibility="All"
                       EnableRowVirtualization="True"
                       EnableColumnVirtualization="True"
@@ -234,6 +248,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
-        
+
     </Grid>
 </mah:MetroWindow>
