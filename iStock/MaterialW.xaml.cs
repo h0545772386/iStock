@@ -161,6 +161,14 @@ namespace iStock
         {
             using (var db = new Model1())
             {
+                if (m.BrCode1 == null)
+                {
+                    m.BrCode1 = "22221" + m.MatId.ToString();
+                }
+                else if (m.BrCode1 == "")
+                {
+                    m.BrCode1 = "22221" + m.MatId.ToString();
+                }
                 db.Materials.Add(m);
                 db.SaveChanges();
             }

@@ -64,7 +64,7 @@ namespace iStock
 
         private void BSave_Click(object sender, RoutedEventArgs e)
         {
-            if(dpDate1.SelectedDate.Value>DateTime.Today)
+            if (dpDate1.SelectedDate.Value > DateTime.Today)
             {
                 MSGW msgw = new MSGW();
                 msgw.Owner = this;
@@ -75,6 +75,11 @@ namespace iStock
             if (Check())
             {
                 t.Date1 = dpDate1.SelectedDate.Value.DateToINT_YYYYMMDD();
+                if (m.Date1 < t.Date1)
+                {
+                    m.Date1 = t.Date1;
+                }
+
                 if (t.Mode == "New")
                 {
                     t.LoadNum = DB_Provider.GetLoadNum();
@@ -130,6 +135,13 @@ namespace iStock
             using (var db = new Model1())
             {
                 db.Transactions.Add(t);
+                db.SaveChanges();
+                if (m.UOM2 == null || m.UOM2 == "")
+                {
+                    m.UOM2 = m.UOM1;
+                }
+
+                db.Materials.AddOrUpdate(m);
                 db.SaveChanges();
             }
         }

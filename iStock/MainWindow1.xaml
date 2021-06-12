@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow x:Class="iStock.TransactionsW"
+﻿<mah:MetroWindow x:Class="iStock.MainWindow1"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,13 +9,12 @@
                  Title="iStock"
                  Icon="Images/2.256x256 transparent.ico"
                  Height="450"
-                 Width="800"
+                 Width="900"
                  FlowDirection="RightToLeft"
                  WindowState="Maximized"
                  WindowStyle="ThreeDBorderWindow"
                  WindowStartupLocation="CenterScreen"
-                 ContentRendered="MetroWindow_ContentRendered"
-                 Closed="MetroWindow_Closed">
+                 ContentRendered="MetroWindow_ContentRendered">
     <mah:MetroWindow.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
@@ -25,7 +24,6 @@
         </LinearGradientBrush>
     </mah:MetroWindow.Background>
     <Window.Resources>
-        <local:Int2DateConverter x:Key="Int2Date" />
         <local:Fonts x:Key="FntSize" />
     </Window.Resources>
     <Grid Margin="3">
@@ -78,8 +76,7 @@
                        VerticalAlignment="Center"
                        Margin="3"
                        Grid.Row="1"
-                       Grid.Column="0" 
-                       Visibility="Collapsed"/>
+                       Grid.Column="0" />
             <CheckBox Name="cbAll"
                       Grid.Column="1"
                       Grid.Row="1"
@@ -91,21 +88,78 @@
                       BorderBrush="Black"
                       BorderThickness="1.64"
                       Checked="cbAll_Checked"
-                      Unchecked="cbAll_Unchecked"
-                      Visibility="Collapsed" />
+                      Unchecked="cbAll_Unchecked" />
             <StackPanel Orientation="Horizontal"
                         Grid.Row="0"
                         Grid.RowSpan="2"
                         Grid.Column="2">
-                <Button Name="bAddNew"
+                <Button Name="bAddMaterial"
                         BorderBrush="Black"
                         BorderThickness="1.64"
-                        Click="BAddNew_Click"
-                        Width="104">
+                        Click="BAddMaterial_Click"
+                        Width="114">
                     <Button.ToolTip>
                         <TextBlock Text="הוסף חומר חדש" />
                     </Button.ToolTip>
-                    <TextBlock Text="תנועה"
+                    <TextBlock Text="חומר חדש"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bAddTranz"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BAddTranz_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="הצג תנועות חומרים" />
+                    </Button.ToolTip>
+                    <TextBlock Text="תנועוה"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bTranzs"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BTranzs_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="הצג תנועות חומרים" />
+                    </Button.ToolTip>
+                    <TextBlock Text="הצג תנועות"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bReports"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="bReports_Click"
+                        Width="114">
+                    <Button.ToolTip>
+                        <TextBlock Text="דוחות" />
+                    </Button.ToolTip>
+                    <TextBlock Text="דוחות"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Button>
+                <Button Name="bLoadCSV"
+                        BorderBrush="Black"
+                        BorderThickness="1.64"
+                        Click="BLoadCSV_Click"
+                        Width="164"
+                        Visibility="Collapsed">
+                    <Button.ToolTip>
+                        <TextBlock Text="טעינת תנועות מקובץ" />
+                    </Button.ToolTip>
+
+                    <TextBlock Text="טעינה מקבוץ"
                                FontSize="14"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
@@ -113,13 +167,13 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <GroupBox Name="GBTranzs"
+        <GroupBox Name="GBMaterials"
                   Margin="0 8 0 0"
                   Grid.Row="2"
                   HeaderStringFormat="נמצאו {0} רשומות"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch">
-            <DataGrid x:Name="DGTranzs"
+            <DataGrid x:Name="DGMaterials"
                       Margin="3 8 3 8"
                       AutoGenerateColumns="False"
                       Background="Transparent"
@@ -127,7 +181,7 @@
                       CanUserDeleteRows="False"
                       CanUserResizeRows="False"
                       IsReadOnly="True"
-                      MouseDoubleClick="DGTranzs_MouseDoubleClick"
+                      MouseDoubleClick="DGMaterials_MouseDoubleClick"
                       SelectionMode="Single"
                       ItemsSource="{Binding}"
                       AlternatingRowBackground="AliceBlue"
@@ -167,8 +221,8 @@
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridHyperlinkColumn Width="Auto"
-                                             Binding="{Binding Path=TrnId}"
-                                             Header="תנועה">
+                                             Binding="{Binding Path=MatId}"
+                                             Header="מזהה חומר">
                         <DataGridHyperlinkColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <EventSetter Event="Hyperlink.Click"
@@ -177,25 +231,23 @@
                         </DataGridHyperlinkColumn.ElementStyle>
                     </DataGridHyperlinkColumn>
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Date1, Converter={StaticResource Int2Date}}"
-                                        Header="תאר' אחרון" />
-                    <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=MatId}"
-                                        Header="מזהה חומר" />
+                                        Binding="{Binding Path=BrCode1}"
+                                        Header="ברקוד" />
                     <DataGridTextColumn Width="Auto"
                                         Binding="{Binding Path=Name1}"
                                         Header="תאור חומר" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=Direction}"
-                                        Header="IN/OUT" />
+                                        Binding="{Binding Path=MinQTY}"
+                                        Header="כמות מינ'" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=TrnQTY}"
-                                        Header="כמות" />
+                                        Binding="{Binding Path=MaxQTY}"
+                                        Header="כמות מקס'" />
                     <DataGridTextColumn Width="Auto"
-                                        Binding="{Binding Path=UOM1}"
-                                        Header="יחידה" />
+                                        Binding="{Binding Path=TotalQTY}"
+                                        Header="מלאי" />
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
+
     </Grid>
 </mah:MetroWindow>

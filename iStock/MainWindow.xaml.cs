@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace iStock
 {
@@ -14,15 +16,23 @@ namespace iStock
     public partial class MainWindow : MetroWindow
     {
         private Material M;
-        private List<Material> LM;
+        private  List<Material> LM;
+        private readonly CancellationTokenSource tokenSource;
         public MainWindow()
         {
+            tokenSource = new CancellationTokenSource();
             InitializeComponent();
+            if (DateTime.Now > new DateTime(2021, 9, 9))
+            {
+                Application.Current.Shutdown();
+                return;
+            }
         }
 
         private void MetroWindow_ContentRendered(object sender, EventArgs e)
         {
-            GO();
+            DO11();
+            //GO();
         }
         private void GO()
         {
@@ -48,12 +58,13 @@ namespace iStock
                     LT = db.Transactions.Where(tt => tt.Status == "פעיל").ToList();
                 }
             }
-            LM = LM.OrderBy(x => x.Name1).ToList();
+            LM = LM.OrderByDescending(x => x.Date1).ThenBy(x => x.Name1).ToList();
 
             LM.ForEach(tt => tt.TotalQTY =
                 LT.Where(x => x.MatId == tt.MatId && x.Direction == "IN").Sum(y => y.TrnQTY) -
                 LT.Where(x => x.MatId == tt.MatId && x.Direction == "OUT").Sum(y => y.TrnQTY)
                 );
+
             GBMaterials.Header = LM.Count.ToString();
             DGMaterials.ItemsSource = LM;
         }
@@ -174,7 +185,76 @@ namespace iStock
 
         private void bReports_Click(object sender, RoutedEventArgs e)
         {
+            //var waitDialog = new WaitingDialog("Loading data", "Loading PCustomers list, please wait...", GetPCustomersPreview, false, this, tokenSource);
+            //var r = waitDialog.ShowDialog();
+            //if (r != true)
+            //{
+            //    return;
+            //}
 
+            //MainWindow1 mw = new MainWindow1(LM);
+            //mw.ShowDialog();
+        }
+
+        private void DO11()
+        {
+            var waitDialog = new WaitingDialog("טוען נתונים", "טעינת נתונים, נא להמתין...", GetPCustomersPreview, true, this, tokenSource);
+            var r = waitDialog.ShowDialog();
+            if (r != true)
+            {
+                return;
+            }
+            GBMaterials.Header = LM.Count.ToString();
+            DGMaterials.ItemsSource = LM;
+
+        }
+
+        private void GetPCustomersPreview(WaitingDialog dialog)
+        {
+            try
+            {
+                List<Transaction> LT = null;
+                Thread.Sleep(5666);
+                using (var db = new Model1())
+                {
+                    LM = db.Materials.Where(tt => tt.Status == "פעיל").ToList();
+                    LT = db.Transactions.Where(tt => tt.Status == "פעיל").ToList();
+
+                }
+                LM = LM.OrderByDescending(x => x.Date1).ThenBy(x => x.Name1).ToList();
+
+                LM.ForEach(tt => tt.TotalQTY =
+                    LT.Where(x => x.MatId == tt.MatId && x.Direction == "IN").Sum(y => y.TrnQTY) -
+                    LT.Where(x => x.MatId == tt.MatId && x.Direction == "OUT").Sum(y => y.TrnQTY)
+                    );
+
+
+                if (dialog != null)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        dialog.DialogResult = true;
+                        dialog.Close();
+                    }, DispatcherPriority.ApplicationIdle);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                if (dialog != null)
+                {
+                    Dispatcher.Invoke(dialog.Close, DispatcherPriority.ApplicationIdle);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (dialog != null)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        dialog.ToErrorDialog("Exception", ex.ToString());
+                    }, DispatcherPriority.ApplicationIdle);
+                }
+            }
         }
     }
 }
