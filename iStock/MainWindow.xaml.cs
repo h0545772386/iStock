@@ -16,7 +16,7 @@ namespace iStock
     public partial class MainWindow : MetroWindow
     {
         private Material M;
-        private  List<Material> LM;
+        private List<Material> LM;
         private readonly CancellationTokenSource tokenSource;
         public MainWindow()
         {
@@ -198,7 +198,7 @@ namespace iStock
 
         private void DO11()
         {
-            var waitDialog = new WaitingDialog("טוען נתונים", "טעינת נתונים, נא להמתין...", GetPCustomersPreview, true, this, tokenSource);
+            var waitDialog = new WaitingDialog("טוען נתונים", "נא להמתין .....", GetStockData, true, this, tokenSource);
             var r = waitDialog.ShowDialog();
             if (r != true)
             {
@@ -209,12 +209,11 @@ namespace iStock
 
         }
 
-        private void GetPCustomersPreview(WaitingDialog dialog)
+        private void GetStockData(WaitingDialog dialog)
         {
             try
             {
                 List<Transaction> LT = null;
-                Thread.Sleep(5666);
                 using (var db = new Model1())
                 {
                     LM = db.Materials.Where(tt => tt.Status == "פעיל").ToList();
@@ -227,7 +226,6 @@ namespace iStock
                     LT.Where(x => x.MatId == tt.MatId && x.Direction == "IN").Sum(y => y.TrnQTY) -
                     LT.Where(x => x.MatId == tt.MatId && x.Direction == "OUT").Sum(y => y.TrnQTY)
                     );
-
 
                 if (dialog != null)
                 {
@@ -255,6 +253,7 @@ namespace iStock
                     }, DispatcherPriority.ApplicationIdle);
                 }
             }
+            Thread.Sleep(4000);
         }
     }
 }

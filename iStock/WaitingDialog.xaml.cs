@@ -11,7 +11,7 @@ namespace iStock
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class WaitingDialog : MetroWindow
+    public partial class WaitingDialog : Window
     {
         private readonly Action<WaitingDialog> action;
         private readonly CancellationTokenSource tokenSource;

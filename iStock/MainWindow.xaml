@@ -139,7 +139,8 @@
                         BorderBrush="Black"
                         BorderThickness="1.64"
                         Click="bReports_Click"
-                        Width="114">
+                        Width="114"
+                        Visibility="Collapsed">
                     <Button.ToolTip>
                         <TextBlock Text="דוחות" />
                     </Button.ToolTip>
